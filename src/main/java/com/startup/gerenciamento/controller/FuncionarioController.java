@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -29,7 +31,13 @@ public class FuncionarioController {
     @GetMapping("/perfil")
     public String getPerfil(@RequestParam int id, Model model){
         FuncionarioDTO perfil = service.getPerfilFuncionario(id);
-        model.addAttribute("perfil", perfil);
+        model.addAttribute("funcionario", perfil);
         return "perfil";
+    }
+    
+    @PostMapping("/atualizar")
+    public String salvarDados(@ModelAttribute FuncionarioDTO funcionario){
+        service.save(funcionario);
+        return "redirect:/funcionarios";
     }
 }

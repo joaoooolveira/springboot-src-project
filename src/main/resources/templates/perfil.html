@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Funcionários</title>
+        <title>Editar Funcionário</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <header>
-
+            <nav>
+                <a href="/funcionarios">Voltar</a>
+            </nav>
         </header>
         <main>
             <h1>Funcionario(a)</h1>
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>nome</th>
-                    <th>Cargo</th>
-                    <th>Departamento</th>
-                    <th>Email</th>
-                    <th>Contratacao</th>
-                    <th>Ações</th>
-                </tr>
-                <tr th:each="f: ${perfil}">
-                    <td th:text="${f.id}"></td>
-                    <td th:text="${f.nome}"></td>
-                    <td th:text="${f.cargo}"></td>
-                    <td th:text="${f.departamento}"></td>
-                    <td th:text="${f.email}"></td>
-                    <td th:text="${f.dataContratacao}"></td>
-                    <td>
-                        <a th:href="@{/perfil(id=${f.id})}">Editar</a>                       
-                    </td>
-                </tr>
-            </table>
+            <h2>Editar Dados</h2>
+            <form th:action="@{/atualizar}"
+                  th:object="${funcionario}" method="post">
+                
+                <label>Nome:</label>
+                <input type="text" th:field="*{nome}" /><br />
+                <label>Email:</label>
+                <input type="email" th:field="*{email}" /><br />
+                <label>Cargo:</label>
+                <input type="text" th:field="*{cargo}" /><br />
+                <label>Departamento:</label>
+                <input type="text" th:field="*{departamento}" /><br />
+                <label>Data de contratação</label>
+                <input type="date" th:field="*{dataContratacao}" /><br />
+                <button type="submit">Salvar</button>
+                
+                <input type="hidden" th:field="*{id}" />
+            </form>
         </main>
     </body>
 </html>

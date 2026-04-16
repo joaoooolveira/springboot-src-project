@@ -71,4 +71,42 @@ public class FuncionarioDAO {
         
         return funcionario;
     }
+    
+    public void editPerfil(FuncionarioDTO funcionario){
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            
+            stmt = conn.prepareStatement("update funcionarios set nome = ?, email = ?, cargo = ?, departamento = ? where id = ?");
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getEmail());
+            stmt.setString(3, funcionario.getCargo());
+            stmt.setString(4, funcionario.getDepartamento());
+            stmt.setInt(5, funcionario.getId());
+            
+            stmt.executeUpdate();
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveFuncionario(FuncionarioDTO funcionario){
+        try{
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            
+            stmt = conn.prepareStatement("insert into funcionarios (nome, email, cargo, departamento) values (?, ?, ?, ?)");
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getEmail());
+            stmt.setString(3, funcionario.getCargo());
+            stmt.setString(4, funcionario.getDepartamento());
+            
+            rs = stmt.executeQuery();
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

@@ -20,4 +20,12 @@ public class FuncionarioService {
     public FuncionarioDTO getPerfilFuncionario(int id) {
         return repository.getPerfilFuncionario(id);
     }
+    
+    public void editPerfil(FuncionarioDTO funcionario){
+        repository.editPerfil(funcionario);
+    }
+    
+    public void save(FuncionarioDTO funcionario){
+        repository.saveFuncionario(funcionario);
+    }
 }
