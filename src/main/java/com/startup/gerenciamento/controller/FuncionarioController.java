@@ -35,8 +35,21 @@ public class FuncionarioController {
         return "perfil";
     }
     
+    @GetMapping("/adicionar-novo")
+    public String adicionarNovo(Model model){
+        FuncionarioDTO funcionario = new FuncionarioDTO();
+        model.addAttribute("funcionario", funcionario);
+        return "adicionar-novo";
+    }
+    
     @PostMapping("/atualizar")
-    public String salvarDados(@ModelAttribute FuncionarioDTO funcionario){
+    public String atualizarDados(@ModelAttribute FuncionarioDTO funcionario){
+        service.editPerfil(funcionario);
+        return "redirect:/funcionarios";
+    }
+    
+    @PostMapping("/adicionar")
+    public String adicionarFuncionario(@ModelAttribute FuncionarioDTO funcionario){
         service.save(funcionario);
         return "redirect:/funcionarios";
     }

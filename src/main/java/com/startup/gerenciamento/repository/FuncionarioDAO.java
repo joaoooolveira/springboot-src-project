@@ -95,15 +95,15 @@ public class FuncionarioDAO {
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
-            ResultSet rs = null;
             
-            stmt = conn.prepareStatement("insert into funcionarios (nome, email, cargo, departamento) values (?, ?, ?, ?)");
+            stmt = conn.prepareStatement("insert into funcionarios (nome, cargo, departamento, email, data_contratacao) values (?, ?, ?, ?, ?)");
             stmt.setString(1, funcionario.getNome());
-            stmt.setString(2, funcionario.getEmail());
-            stmt.setString(3, funcionario.getCargo());
-            stmt.setString(4, funcionario.getDepartamento());
+            stmt.setString(2, funcionario.getCargo());
+            stmt.setString(3, funcionario.getDepartamento());
+            stmt.setString(4, funcionario.getEmail());
+            stmt.setDate(5, funcionario.getDataContratacao());
             
-            rs = stmt.executeQuery();
+            stmt.executeUpdate();
             
         } catch(SQLException e){
             e.printStackTrace();
